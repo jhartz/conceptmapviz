@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Concept Map Visualizer</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/d3-map.css">
+
+    <script src="https://js.arcgis.com/3.16/"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <script src="scripts/arcgis-map.js"></script>
+    <script src="scripts/d3-map.js"></script>
+</head>
+
+<body>
+    <div id="top">
+        <header>
+            <div class="content">
+                <h1>Concept Map Visualizer</h1>
+            </div>
+        </header>
+
+        <div class="content content-main">
+            <div id="concept-container" class="container"><div class="container-content">
+                <div id="d3-map" style="height: 100%; position: relative;"></div>
+            </div></div>
+
+            <div id="map-container" class="container"><div class="container-content">
+                <div id="arcgis-map"></div>
+            </div></div>
+        </div>
+    </div>
+</body>
+
+</html>

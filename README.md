@@ -1,2 +1,1 @@
-# conceptmapviz
-Concept Map Visualizer
+# Concept Map Visualizer
