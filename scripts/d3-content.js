@@ -1,4 +1,4 @@
-window.addEventListener("load", function (event) {
+(function () {
     var root = TEST_DATA;
 
     var width = document.getElementById("d3-map").clientWidth,
@@ -100,8 +100,11 @@ window.addEventListener("load", function (event) {
     }
 
     // Start
-    update();
-}, false);
+    window.addEventListener("load", function () {
+        // Start
+        update();
+    }, false);
+})();
 
 
 // Test data from:
