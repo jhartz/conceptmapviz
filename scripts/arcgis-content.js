@@ -14,7 +14,7 @@ require([
     TooltipDialog, dijitPopup
 ) {
     map = new Map("arcgis-content", {
-        basemap: "hybrid",
+        basemap: "osm",
         center: [36.322427, 32.303399],
         zoom: 14
     });
