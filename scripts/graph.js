@@ -57,7 +57,12 @@ var graph = {};
         var nodes = [];
         var links = [];
 
-        var queue = _rootKeys.slice();
+        var queue = [];
+        _rootKeys.forEach(function (key) {
+            queue.push(key);
+            visitedKeys[key] = true;
+        });
+
         var currentKey, currentNode;
         while (queue.length > 0) {
             // Get the node at the front of the queue
@@ -70,8 +75,7 @@ var graph = {};
                         "correspond to an existing node!");
             }
 
-            // Add it to our list, and mark it as visited
-            visitedKeys[currentKey] = true;
+            // Add this node to our list
             nodes.push(currentNode);
 
             // Look at this node's children, if they're visible
