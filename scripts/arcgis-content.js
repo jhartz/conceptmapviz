@@ -13,7 +13,7 @@ require([
     Color, number, domStyle, 
     TooltipDialog, dijitPopup
 ) {
-    map = new Map("arcgis-map", {
+    map = new Map("arcgis-content", {
         basemap: "hybrid",
         center: [36.322427, 32.303399],
         zoom: 14
