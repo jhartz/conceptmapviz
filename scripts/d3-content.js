@@ -1,5 +1,11 @@
+// Object to hold all exported functions from this file
+var d3Content = {};
+
 // Anonymous function to encapsulate D3 initialization
 (function () {
+    // Handlers for when an element is clicked
+    var clickHandlers = [];
+
     // The main D3 Force layout
     var force = d3.layout.force()
         .charge(-500)
@@ -39,6 +45,30 @@
         .append("svg:path")
         .attr("d", "M10,-5L0,0L10,5")
         .attr("fill", "#000");
+
+
+    /**
+     * Register a new click handler.
+     *
+     * @public
+     */
+    d3Content.registerClickHandler = function (callback) {
+        if (!callback) return false;
+        clickHandlers.push(callback);
+        return true;
+    };
+
+    /**
+     * Remove a registered click handler.
+     *
+     * @public
+     */
+    d3Content.unregisterClickHandler = function (callback) {
+        var index = clickHandlers.indexOf(callback);
+        if (index == -1) return false;
+        clickHandlers.splice(index, 1);
+        return true;
+    };
 
 
     /**
@@ -93,6 +123,7 @@
             .attr("transform", function (d) {
                 return "translate(" + d.x + "," + d.y + ")";
             })
+            .on("dblclick", dblclick)
             .on("click", click)
             .call(force.drag);
 
@@ -154,9 +185,31 @@
         }
     }
 
-    // Toggle children on click
+    var clickTimeouts = [];
+
+    // Run click handlers on click
     function click(d) {
         if (!d3.event.defaultPrevented) {
+            var elem = this;
+            var index = -1 + clickTimeouts.push(setTimeout(function () {
+                clickTimeouts.splice(index, 1);
+
+                var needsUpdate = false;
+                clickHandlers.forEach(function (handler) {
+                    needsUpdate = handler(d, elem) || needsUpdate;
+                });
+                if (needsUpdate) update();
+            }, 300));
+        }
+    }
+
+    // Toggle children on double-click
+    function dblclick(d) {
+        if (!d3.event.defaultPrevented) {
+            while (clickTimeouts.length) {
+                clearTimeout(clickTimeouts.pop());
+            }
+
             d.childrenVisible = !d.childrenVisible;
             update();
         }

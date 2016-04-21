@@ -16,6 +16,13 @@ require([
     map = new Map("arcgis-content", {
         basemap: "osm",
         center: [36.322427, 32.303399],
-        zoom: 14
+        zoom: 16
+    });
+
+    d3Content.registerClickHandler(function (d, elem) {
+        if (typeof d.data.latitude == "number" && typeof d.data.longitude == "number") {
+            // TODO: Check return value (Promise?)
+            map.centerAndZoom([d.data.longitude, d.data.latitude], 16);
+        }
     });
 });
