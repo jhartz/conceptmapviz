@@ -3,7 +3,7 @@
     // The main D3 Force layout
     var force = d3.layout.force()
         .charge(-500)
-        .linkDistance(90)
+        .linkDistance(250)
         .on("tick", tick);
 
     // The svg element into which everything goes
@@ -14,6 +14,31 @@
     // References to the links and nodes in the svg element
     var svgLinks = svg.selectAll(".link"),
         svgNodes = svg.selectAll(".node");
+
+    // Define arrow markers for graph links
+    svg.append("svg:defs")
+        .append("svg:marker")
+        .attr("id", "end-arrow")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 6)
+        .attr("markerWidth", 3)
+        .attr("markerHeight", 3)
+        .attr("orient", "auto")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5")
+        .attr("fill", "#000");
+
+    svg.append("svg:defs")
+        .append("svg:marker")
+        .attr("id", "start-arrow")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 4)
+        .attr("markerWidth", 3)
+        .attr("markerHeight", 3)
+        .attr("orient", "auto")
+        .append("svg:path")
+        .attr("d", "M10,-5L0,0L10,5")
+        .attr("fill", "#000");
 
 
     /**
@@ -50,6 +75,7 @@
         svgLinks.enter()
             .insert("line", ".node")
             .attr("class", "link")
+            .style("marker-end", "url(#end-arrow)")
             .attr("x1", function (d) { return d.source.x; })
             .attr("y1", function (d) { return d.source.y; })
             .attr("x2", function (d) { return d.target.x; })
@@ -83,10 +109,30 @@
 
     function tick() {
         // Update positions of links
-        svgLinks.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
+        //svgLinks.attr("x1", function(d) { return d.source.x; })
+        //    .attr("y1", function(d) { return d.source.y; })
+        //    .attr("x2", function(d) { return d.target.x; })
+        //    .attr("y2", function(d) { return d.target.y; });
+        svgLinks.each(function (d) {
+            var deltaX = d.target.x - d.source.x,
+                deltaY = d.target.y - d.source.y,
+                dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
+                normX = deltaX / dist,
+                normY = deltaY / dist,
+                //sourcePadding = d.left ? 17 : 12,
+                //targetPadding = d.right ? 17 : 12,
+                sourcePadding = 35,
+                targetPadding = 38,
+                sourceX = d.source.x + (sourcePadding * normX),
+                sourceY = d.source.y + (sourcePadding * normY),
+                targetX = d.target.x - (targetPadding * normX),
+                targetY = d.target.y - (targetPadding * normY);
+
+            this.setAttribute("x1", sourceX);
+            this.setAttribute("y1", sourceY);
+            this.setAttribute("x2", targetX);
+            this.setAttribute("y2", targetY);
+        });
 
         // Update positions of nodes
         svgNodes.attr("transform", function (d) {
