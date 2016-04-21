@@ -38,19 +38,24 @@
     <script src="scripts/d3-content.js"></script>
 
 <script>
+// lng: 36.322427, lat: 32.303399
 var MY_TEST_DATA = {
     "kitchen": {
         title: "Kitchen",
         children: ["kitchen2", "store"],
         data: {
-            latitude: 5,
-            longitude: 20
+            latitude: 32.3,
+            longitude: 36.3
         },
         root: true
     },
     "kitchen2": {
         title: "Kitchen #2",
         children: ["store"],
+        data: {
+            latitude: 32.6,
+            longitude: 36.0
+        },
         root: true
     },
     "bathroom": {
@@ -59,7 +64,11 @@ var MY_TEST_DATA = {
     },
     "store": {
         title: "Store",
-        children: ["bathroom"]
+        children: ["bathroom"],
+        data: {
+            latitude: 32.0,
+            longitude: 36.6
+        }
     },
 
     /*

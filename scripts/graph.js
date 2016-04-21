@@ -19,7 +19,7 @@ var graph = {};
         obj = obj || {};
         this.isRoot = !!obj.root;
         this.title = obj.title || key;
-        this.data = obj.data;
+        this.data = obj.data || {};
         this.childrenKeys = obj.children || [];
         this.childrenVisible = true;
     }

@@ -20,7 +20,7 @@ require([
     });
 
     d3Content.registerClickHandler(function (d, elem) {
-        if (typeof d.data.latitude == "number" && typeof d.data.longitude == "number") {
+        if (d.data && typeof d.data.latitude == "number" && typeof d.data.longitude == "number") {
             // TODO: Check return value (Promise?)
             map.centerAndZoom([d.data.longitude, d.data.latitude], 16);
         }
