@@ -17,12 +17,22 @@
 <body>
     <div id="top">
         <header>
-            <div class="page">
-                <h1>Concept Map Visualizer</h1>
-            </div>
+            <section>
+                <h1 class="section-main">Concept Map Visualizer</h1>
+                <ul>
+                    <li><a href="#" class="toggler" data-show-id="about">About</a></li>
+                    <li><a href="#" class="toggler" data-show-id="help">Help</a></li>
+                </ul>
+            </section>
+            <section id="about" style="display: none;">
+                <p>About Text Here</p>
+            </section>
+            <section id="help" style="display: none;">
+                <p>Help Text Here</p>
+            </section>
         </header>
 
-        <div class="page page-main">
+        <section class="page-main">
             <div class="container"><div class="container-content">
                 <div id="d3-content" class="content"></div>
             </div></div>
@@ -30,9 +40,17 @@
             <div class="container"><div class="container-content">
                 <div id="arcgis-content" class="content"></div>
             </div></div>
-        </div>
+        </section>
+
+        <footer>
+            <section>
+                <p class="section-main">Created at Rochester Institute of Technology</p>
+                <p>Copyright</p>
+            </section>
+        </footer>
     </div>
 
+    <script src="scripts/common.js"></script>
     <script src="scripts/graph.js"></script>
     <script src="scripts/arcgis-content.js"></script>
     <script src="scripts/d3-content.js"></script>

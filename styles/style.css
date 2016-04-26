@@ -20,21 +20,50 @@ body {
     flex-direction: column;
 }
 
-header {
-    background-color: #444;
+header, footer {
+    background-color: #222;
     color: #bbb;
 }
 
-.page {
-    margin: 0 auto;
-    max-width: 1400px;
+header h1, footer h1 {
+    margin: 12px 0;
 }
 
-.page-main {
-    flex-grow: 1;
+header p, footer p {
+    margin: 10px 0;
+}
+
+header ul, footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+header ul li, footer ul li {
+    display: inline;
+}
+
+header a, footer a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+header a:hover, footer a:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+section {
+    margin: 0 auto;
+    max-width: 1400px;
     width: 100%;
     display: flex;
     flex-direction: row;
+}
+
+.page-main, .section-main {
+    flex-grow: 1;
 }
 
 .container {
