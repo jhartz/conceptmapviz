@@ -216,11 +216,11 @@ var d3Content = {};
     }
 
 
-    window.addEventListener("load", function () {
+    onReady(function () {
         graph.init(MY_TEST_DATA);
         resize();
         update();
-    }, false);
+    });
 
     window.addEventListener("resize", function () {
         resize();
