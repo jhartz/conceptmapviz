@@ -1,9 +1,17 @@
+/*
+ * Concept Map Visualizer
+ * Copyright (c) 2016 Jake Hartz
+ * Licensed under the MIT Licence. For more information, see the LICENSE file.
+ */
+
+
 /**
  * Register a new DOMContentLoaded (page load) handler.
  */
 function onReady(callback) {
     window.addEventListener("DOMContentLoaded", callback, false);
 }
+
 
 // Anonymous function to encapsulate private data and functions
 (function () {

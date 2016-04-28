@@ -1,7 +1,20 @@
-// Object to hold all exported functions from this file
-var d3Content = {};
+/*
+ * Concept Map Visualizer
+ * Copyright (c) 2016 Jake Hartz
+ * Licensed under the MIT Licence. For more information, see the LICENSE file.
+ */
 
-// Anonymous function to encapsulate D3 initialization
+
+// Object to hold all exported functions from this file
+var d3Content = {
+    // initData
+    // registerClickHandler
+    // unregisterClickHandler
+};
+
+
+// Anonymous function to encapsulate private data and functions
+// (D3 initialization)
 (function () {
     // Handlers for when an element is clicked
     var clickHandlers = [];
@@ -48,9 +61,24 @@ var d3Content = {};
 
 
     /**
-     * Register a new click handler.
-     *
+     * Initialize new data in the D3 graph.
      * @public
+     *
+     * @param {Array.<Object>} data - The new graph data.
+     */
+    d3Content.initData = function (data) {
+        graph.init(data);
+        update();
+    };
+
+
+    /**
+     * Register a new click handler.
+     * @public
+     *
+     * @param {Function} callback - The function to call when a graph element
+     *        is clicked.
+     * @return {boolean} Whether the handler was added successfully.
      */
     d3Content.registerClickHandler = function (callback) {
         if (!callback) return false;
@@ -60,8 +88,11 @@ var d3Content = {};
 
     /**
      * Remove a registered click handler.
-     *
      * @public
+     *
+     * @param {Function} callback - The function that was originally passed to
+     *        registerClickHandler.
+     * @return {boolean} Whether the handler was added successfully.
      */
     d3Content.unregisterClickHandler = function (callback) {
         var index = clickHandlers.indexOf(callback);
@@ -73,6 +104,7 @@ var d3Content = {};
 
     /**
      * Handle resizing of the force layout to fit its parent size.
+     * @private
      */
     function resize() {
         var width = document.getElementById("d3-content").clientWidth;
@@ -83,6 +115,7 @@ var d3Content = {};
 
     /**
      * Update the D3 visualization.
+     * @private
      */
     function update() {
         var graphData = graph.get();
@@ -138,6 +171,11 @@ var d3Content = {};
         svgNodes.select("circle").style("fill", color);
     }
 
+
+    /**
+     * Update the location of nodes and links on the graph.
+     * @private
+     */
     function tick() {
         // Update positions of links
         //svgLinks.attr("x1", function(d) { return d.source.x; })
@@ -171,7 +209,15 @@ var d3Content = {};
         });
     }
 
-    // Color leaf nodes orange, and packages white or blue
+
+    /**
+     * Get the color for a specific node.
+     * Color leaf nodes orange, and packages white or blue.
+     * @private
+     *
+     * @param d - The data object (node).
+     * @return {string} The hex color code for the node.
+     */
     function color(d) {
         if (d.isRoot) {
             // Root node
@@ -185,6 +231,8 @@ var d3Content = {};
         }
     }
 
+
+    // Array of timeouts to handle single vs double clicking
     var clickTimeouts = [];
 
     // Run click handlers on click
@@ -217,9 +265,7 @@ var d3Content = {};
 
 
     onReady(function () {
-        graph.init(MY_TEST_DATA);
         resize();
-        update();
     });
 
     window.addEventListener("resize", function () {

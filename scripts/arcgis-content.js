@@ -1,3 +1,10 @@
+/*
+ * Concept Map Visualizer
+ * Copyright (c) 2016 Jake Hartz
+ * Licensed under the MIT Licence. For more information, see the LICENSE file.
+ */
+
+
 var map;
 
 require([
@@ -20,9 +27,11 @@ require([
     });
 
     d3Content.registerClickHandler(function (d, elem) {
-        if (d.data && typeof d.data.latitude == "number" && typeof d.data.longitude == "number") {
+        if (d.data &&
+                typeof d.data.Latitude == "number" &&
+                typeof d.data.Longitude == "number") {
             // TODO: Check return value (Promise?)
-            map.centerAndZoom([d.data.longitude, d.data.latitude], d.data.zoom || 14);
+            map.centerAndZoom([d.data.Longitude, d.data.Latitude], d.data.Zoom || 14);
         }
     });
 });

@@ -1,5 +1,16 @@
+/*
+ * Concept Map Visualizer
+ * Copyright (c) 2016 Jake Hartz
+ * Licensed under the MIT Licence. For more information, see the LICENSE file.
+ */
+
+
 // Object to hold all exported functions from this file
-var graph = {};
+var graph = {
+    // init
+    // get
+};
+
 
 // Anonymous function to encapsulate private data and functions
 (function () {
@@ -10,8 +21,11 @@ var graph = {};
 
     /**
      * Class representing a node in our graph.
-     *
+     * @private
      * @constructor
+     *
+     * @param {string} key - The key or ID for this node.
+     * @param {Object} obj - The data with this node.
      */
     function Node(key, obj) {
         this.id = this.key = key;
@@ -27,8 +41,10 @@ var graph = {};
 
     /**
      * Transform a tree structure of nodes into Node objects.
-     *
      * @public
+     *
+     * @param {Object} data - Initialize the new graph with a new object full
+     *        of data.
      */
     graph.init = function (data) {
         // Reset the nodes
@@ -50,8 +66,9 @@ var graph = {};
 
     /**
      * Get the nodes and the links between nodes in the graph.
-     *
      * @public
+     *
+     * @return {Object} An object with a "nodes" array and a "links" array.
      */
     graph.get = function () {
         // Only return nodes reachable from a root node
@@ -108,8 +125,10 @@ var graph = {};
     /**
      * Check whether we can reach another Node from this Node through visible
      * children.
-     *
      * @public
+     *
+     * @param {Node} otherNode - The node to compare with.
+     * @return {boolean} Whether we can reach otherNode.
      */
     Node.prototype.canReachNode = function (otherNode) {
         // BFS search from this node to the other node
