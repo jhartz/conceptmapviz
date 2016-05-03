@@ -7,7 +7,7 @@
 
 // Object to hold all exported functions from this file
 var d3Content = {
-    // initData
+    // initWithGraph
     // registerClickHandler
     // unregisterClickHandler
 };
@@ -18,6 +18,9 @@ var d3Content = {
 (function () {
     // Handlers for when an element is clicked
     var clickHandlers = [];
+
+    // The current graph we're rendering
+    var currentGraph = null;
 
     // The main D3 Force layout
     var force = d3.layout.force()
@@ -61,13 +64,13 @@ var d3Content = {
 
 
     /**
-     * Initialize new data in the D3 graph.
+     * Initialize the D3 graph with a new Graph.
      * @public
      *
-     * @param {Array.<Object>} data - The new graph data.
+     * @param {Graph} newGraph - The new Graph object to render.
      */
-    d3Content.initData = function (data) {
-        graph.init(data);
+    d3Content.setGraph = function (newGraph) {
+        currentGraph = newGraph;
         update();
     };
 
@@ -118,7 +121,9 @@ var d3Content = {
      * @private
      */
     function update() {
-        var graphData = graph.get();
+        if (!currentGraph) return;
+
+        var graphData = currentGraph.get();
         var nodes = graphData.nodes,
             links = graphData.links;
 
@@ -165,10 +170,13 @@ var d3Content = {
 
         g.append("text")
             .style("text-anchor", "middle")
-            .text(function (d) { return d.title; });
+            //.text(function (d) { return d.title; });
 
         // Update all nodes
         svgNodes.select("circle").style("fill", color);
+
+        // Update all text labels
+        svgNodes.select("text").text(function (d) { return d.title; })
     }
 
 
@@ -264,7 +272,7 @@ var d3Content = {
     }
 
 
-    onReady(function () {
+    onReady().then(function () {
         resize();
     });
 

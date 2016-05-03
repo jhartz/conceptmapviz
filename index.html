@@ -33,23 +33,31 @@
         </header>
 
         <section class="page-main">
-            <div class="container"><div class="container-content">
-                <div id="d3-content" class="content"></div>
-            </div></div>
+            <div class="container">
+                <div class="container-content centered">
+                    <label id="group-selector-label" for="group-selector"></label><select id="group-selector"></select>
+                </div>
+                <div class="container-content container-content-main">
+                    <div id="d3-content" class="content"></div>
+                </div>
+            </div>
 
-            <div class="container"><div class="container-content">
-                <div id="arcgis-content" class="content"></div>
-            </div></div>
+            <div class="container">
+                <div class="container-content container-content-main">
+                    <div id="arcgis-content" class="content"></div>
+                </div>
+            </div>
         </section>
 
         <footer>
             <section>
                 <p class="section-main">Created at Rochester Institute of Technology</p>
-                <p>Copyright</p>
+                <p>Copyright ...</p>
             </section>
         </footer>
     </div>
 
+    <script src="scripts/es6-promise.min.js"></script>
     <script src="https://www.google.com/jsapi"></script>
     <script src="scripts/common.js"></script>
     <script src="scripts/data.js"></script>
