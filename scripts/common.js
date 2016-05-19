@@ -6,6 +6,24 @@
 
 
 /**
+ * Escapes text so it can be used as HTML.
+ *
+ * @param {string} text - The text to escape.
+ * @param {boolean} [convertNewlines=false] - Whether to convert newlines to
+ *        HTML br tags.
+ * @return {string} The text with HTML special characters removed.
+ */
+function escapeHTML(text, convertNewlines) {
+    var escaped = String(text).replace(/&/g, "&amp;")
+                              .replace(/</g, "&lt;")
+                              .replace(/>/g, "&gt;")
+                              .replace(/"/g, "&quot;");
+    if (convertNewlines) escaped = escaped.replace(/\n/g, "<br>");
+    return escaped;
+}
+
+
+/**
  * Register a new DOMContentLoaded (page load) handler.
  *
  * @return {Promise} A Promise that will be resolved when the window is ready.

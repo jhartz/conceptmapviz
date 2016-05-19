@@ -7,18 +7,13 @@
 
 // Object to hold all exported functions from this file
 var d3Content = {
-    // initWithGraph
-    // registerClickHandler
-    // unregisterClickHandler
+    // setGraph
 };
 
 
 // Anonymous function to encapsulate private data and functions
 // (D3 initialization)
 (function () {
-    // Handlers for when an element is clicked
-    var clickHandlers = [];
-
     // The current graph we're rendering
     var currentGraph = null;
 
@@ -76,36 +71,6 @@ var d3Content = {
 
 
     /**
-     * Register a new click handler.
-     * @public
-     *
-     * @param {Function} callback - The function to call when a graph element
-     *        is clicked.
-     * @return {boolean} Whether the handler was added successfully.
-     */
-    d3Content.registerClickHandler = function (callback) {
-        if (!callback) return false;
-        clickHandlers.push(callback);
-        return true;
-    };
-
-    /**
-     * Remove a registered click handler.
-     * @public
-     *
-     * @param {Function} callback - The function that was originally passed to
-     *        registerClickHandler.
-     * @return {boolean} Whether the handler was added successfully.
-     */
-    d3Content.unregisterClickHandler = function (callback) {
-        var index = clickHandlers.indexOf(callback);
-        if (index == -1) return false;
-        clickHandlers.splice(index, 1);
-        return true;
-    };
-
-
-    /**
      * Handle resizing of the force layout to fit its parent size.
      * @private
      */
@@ -126,6 +91,9 @@ var d3Content = {
         var graphData = currentGraph.get();
         var nodes = graphData.nodes,
             links = graphData.links;
+
+        // Let the map begin updating
+        arcgisContent.initMapPoints(nodes);
 
         // Restart the force layout
         force
@@ -251,9 +219,13 @@ var d3Content = {
                 clickTimeouts.splice(index, 1);
 
                 var needsUpdate = false;
-                clickHandlers.forEach(function (handler) {
-                    needsUpdate = handler(d, elem) || needsUpdate;
-                });
+
+                // Center on the map
+                arcgisContent.centerMapPoint(d);
+
+                //clickHandlers.forEach(function (handler) {
+                //    needsUpdate = handler(d, elem) || needsUpdate;
+                //});
                 if (needsUpdate) update();
             }, 300));
         }

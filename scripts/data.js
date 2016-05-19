@@ -40,7 +40,8 @@ var NODE_DATA_URL = "https://docs.google.com/spreadsheets/d/1CQOrv5ireKNJw-oRAer
 var EXTRA_INFO_URL = "https://docs.google.com/spreadsheets/d/1CQOrv5ireKNJw-oRAer68FWsc67F_CRMfmI7RA7tM44/edit?headers=1&sheet=Info";
 
 // Any other columns in either spreadsheet (e.g. Latitude, Longitude) will be
-// added to the "data" object attached to each node.
+// added to the "data" object attached to each node. These columns are then
+// handled in the arcgis-content.js file.
 
 
 // Anonymous function to encapsulate private data and functions
