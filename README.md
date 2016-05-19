@@ -21,3 +21,7 @@ source (such as a Google spreadsheet).
     - Rendering the map and the info windows on the map
   - `d3-content.js`:
     - Rendering the concept graph
+- `styles/`
+  - `style.css`: The main CSS stylesheet for the Concept Map Visualizer
+    interface
+  - `d3-content.css`: Styles specific to rendering the D3 concept graph
