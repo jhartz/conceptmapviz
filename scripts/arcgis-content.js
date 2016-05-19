@@ -20,7 +20,7 @@ var DATA_LONGITUDE_COLUMN = "Longitude";
 var DATA_ZOOM_COLUMN = "Zoom";
 
 // The label of the "Color" column in a node's data
-var DATA_COLOR_COLUMN = "Color";
+var DATA_COLOR_COLUMN = "Point Color";
 
 // The labels of any columns that contain HTML content to be shown to the user
 var DATA_HTML_COLUMNS = [];
@@ -41,6 +41,7 @@ var DATA_URL_COLUMNS = [];
 
 // Object to hold all exported functions from this file
 var arcgisContent = {
+    // pointHasLocation
     // initMapPoints
     // centerMapPoint
 };
@@ -80,6 +81,21 @@ require([
 
     var graphicsByNodeID = {};
 
+
+    /**
+     * Determine whether a point (node) has location data.
+     * @public
+     *
+     * @param {Node} node - The node to check.
+     *
+     * @return {boolean} Whether the node has location data.
+     */
+    arcgisContent.pointHasLocation = function (node) {
+        var lat = n.data[DATA_LATITUDE_COLUMN],
+            lng = n.data[DATA_LONGITUDE_COLUMN];
+        return typeof lat == "number" && typeof lng == "number";
+    };
+
     /**
      * Load points on the map based on a set of nodes.
      * @public
@@ -95,12 +111,9 @@ require([
         });
 
         // Add the new map points
-        nodes.forEach(function (n) {
+        nodes.filter(arcgisContent.pointHasLocation).forEach(function (n) {
             var lat = n.data[DATA_LATITUDE_COLUMN],
                 lng = n.data[DATA_LONGITUDE_COLUMN];
-            if (typeof lat == "undefined" || typeof lng == "undefined") {
-                return;
-            }
 
             var p = new Point(lng, lat);
             var s = new SimpleMarkerSymbol().setSize(20);

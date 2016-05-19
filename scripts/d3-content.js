@@ -5,6 +5,17 @@
  */
 
 
+// The colors of the different types of concepts
+var ROOT_NODE_WITH_LOCATION_COLOR = "#fd8d3c";
+var ROOT_NODE_NO_LOCATION_COLOR = "#fd8d3c";
+
+var COLLAPSED_NODE_WITH_LOCATION_COLOR = "#3182bd";
+var COLLAPSED_NODE_NO_LOCATION_COLOR = "#3182bd";
+
+var NODE_WITH_LOCATION_COLOR = "#c6dbef";
+var NODE_NO_LOCATION_COLOR = "#c6dbef";
+
+
 // Object to hold all exported functions from this file
 var d3Content = {
     // setGraph
@@ -195,15 +206,16 @@ var d3Content = {
      * @return {string} The hex color code for the node.
      */
     function color(d) {
+        var hasLocation = arcgisContent.pointHasLocation(d);
         if (d.isRoot) {
             // Root node
-            return "#fd8d3c";
+            return hasLocation ? ROOT_NODE_WITH_LOCATION_COLOR : ROOT_NODE_NO_LOCATION_COLOR;
         } else if (d.childrenVisible || d.childrenKeys.length == 0) {
             // Visible children or no children
-            return "#c6dbef";
+            return hasLocation ? NODE_WITH_LOCATION_COLOR : NODE_NO_LOCATION_COLOR;
         } else {
             // Hidden children
-            return "#3182bd";
+            return hasLocation ? COLLAPSED_NODE_WITH_LOCATION_COLOR : COLLAPSED_NODE_NO_LOCATION_COLOR;
         }
     }
 
