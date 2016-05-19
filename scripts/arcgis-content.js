@@ -91,8 +91,8 @@ require([
      * @return {boolean} Whether the node has location data.
      */
     arcgisContent.pointHasLocation = function (node) {
-        var lat = n.data[DATA_LATITUDE_COLUMN],
-            lng = n.data[DATA_LONGITUDE_COLUMN];
+        var lat = node.data[DATA_LATITUDE_COLUMN],
+            lng = node.data[DATA_LONGITUDE_COLUMN];
         return typeof lat == "number" && typeof lng == "number";
     };
 
