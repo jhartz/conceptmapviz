@@ -90,7 +90,7 @@ require([
     arcgisContent.initMapPoints = function (nodes) {
         // Get rid of the old map points
         Object.keys(graphicsByNodeID).forEach(function (graphic) {
-            graphicsLayer.remove(graphic);
+            graphicsLayer.remove(graphicsByNodeID[graphic]);
             delete graphicsByNodeID[graphic];
         });
 
