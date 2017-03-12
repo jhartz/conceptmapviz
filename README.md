@@ -25,3 +25,13 @@ source (such as a Google spreadsheet).
   - `style.css`: The main CSS stylesheet for the Concept Map Visualizer
     interface
   - `d3-content.css`: Styles specific to rendering the D3 concept graph
+
+## Example
+
+The latest code in this repository can be seen at: https://jhartz.github.io/conceptmapviz/
+
+## License
+
+Concept Map Visualizer is licensed under the MIT License.
+
+For details, see the [LICENSE](LICENSE) file.
